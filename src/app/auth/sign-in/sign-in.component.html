@@ -1,0 +1,45 @@
+<div class="container mt-5 bg-black">
+    <div class="row  content">
+        <div class="col-md-4 mx-auto">
+            <div class="text-center mb-2">
+                <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/110989565/original/7a4e9c86ea210ce920fbb347025a485751a880ca/do-new-vegetable-logo-for-your-business.jpg"
+                    alt="" width="250">
+            </div>
+            <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+                <div class="form-group pt-2">
+                    <input type="text" formControlName="userName" placeholder="Email address"
+                        class="form-control form-control-lg">
+                    <div *ngIf="signinForm.get('userName')?.invalid && signinForm.get('userName')?.touched"
+                        class="text-danger">
+                        <span>User name is required.</span>
+                    </div>
+                </div>
+                <div class="form-group pt-2">
+                    <input type="password" id="password" formControlName="password" placeholder="Password"
+                        class="form-control form-control-lg">
+
+                    <div *ngIf="signinForm.get('password')?.invalid && signinForm.get('password')?.touched"
+                        class="text-danger">
+                        <span>Password should contain 6 characters</span>
+                    </div>
+                </div>
+                <div class="checkbox pt-2">
+                    <label>
+                        <input type="checkbox" value="remember-me" formControlName="rememberme"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block pt-2"
+                    [disabled]="!signinForm?.valid || loading">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                    Sign in
+                </button>
+                <div *ngIf="httpResponse.error"
+                    class="text-danger">
+                    <span>{{httpResponse.statusText}}</span>
+                </div>
+                <p class="mt-5 mb-3 text-muted text-center">© 2017-2020</p>
+            </form>
+        </div>
+    </div>
+</div>

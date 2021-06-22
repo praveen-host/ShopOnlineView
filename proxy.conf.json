@@ -1,0 +1,7 @@
+{
+    "/abc123456788/*": {
+        "target": "https://abc123456788.herokuapp.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

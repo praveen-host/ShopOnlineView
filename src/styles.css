@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+#printable { display: none; }
+
+@media print
+{
+    app-navbar  { display: none; }
+    #non-printable { display: none; }
+    #printable { display: block; }
+}
+body { background-color: #fff; }
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+    margin-right: 0px; 
+    margin-left: 0px;
+}
+
+div[class^="col"]{
+    padding:3px 5px;
+}

@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-xl-7 col-md-7 col-sm-12">
+        <legend>Sales Order</legend>
+    </div>
+    <div class="col-xl-5 col-md-5 col-sm-12 ">
+        <form class="form-inline text-right" (ngSubmit)="sumbit()" [formGroup]="salesForm">
+            <div class="form-group mr-2">
+                <label class="sr-only" for="fromDate">Start Date</label>
+                <input type="date" class="form-control" formControlName="fromDate" pattern="dd-MM-yyyy" id="fromDate"
+                    placeholder="Start Date">
+            </div>
+            <div class="form-group mr-2">
+                <label class="sr-only" for="toDate">End Date</label>
+                <input type="date" class="form-control" formControlName="toDate" id="toDate" pattern="dd-MM-yyyy"
+                    placeholder="End Date">
+            </div>
+            <button type="submit" class="btn btn-primary">View</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">OrderId</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Ordered On</th>
+                    <th scope="col">Order Amt.</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Expected Date</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of salesData; index as i">
+                    <td>
+                        <a [routerLink]="['/orderdetail', row.orderId]">{{ row.orderId }}</a>
+
+                    </td>
+                    <td>{{ row.firstName+' '+row.lastName }}</td>
+                    <td>{{ row.orderPalcedOn }}</td>
+                    <td>{{ row.orderValue }}</td>
+                    <td>{{ row.orderStatus }}</td>
+                    <td>{{ row.scheduledFor }}</td>
+                    <td></td>
+                    <td>
+                        <fa-icon [icon]='faTruck' class="btn btn-primary mr-1" role="button"></fa-icon>
+                        <fa-icon [icon]='faPaperPlane'  class="btn btn-primary mr-1" role="button"></fa-icon>                        
+                        <fa-icon [icon]="faPrint" (click)="print()" class="btn btn-primary mr-1" role="button"></fa-icon>                           
+                        
+                    </td>
+ 
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-xl-6">
+        <form [formGroup]="uomForm" (ngSubmit)="addUom()">
+            <fieldset>
+                <div class="row">
+                    <div class="col-6">
+                        <legend>Add Units of measure</legend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Type</label>
+                            <select formControlName="uomType" class="form-select">
+                                <option value="simple">Simple</option>
+                                <option value="compound">Compound</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="uomSymbol">Symbol</label>
+                            <input formControlName="uomSymbol" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="uomFormalName">Formal Name</label>
+                            <input type="text" formControlName="uomFormalName" name="" id="uomFormalName"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="uomDecimalPlaces">Number of decimal places</label>
+                            <input type="number" formControlName="uomDecimalPlaces" name="" id="uomDecimalPlaces"
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <button type="submit" [disabled]="!uomForm.valid" class="btn btn-lg btn-primary px-6">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
+                                {{isEditing?'Update':'Add'}}
+                            </button>&nbsp;
+                            <button class="btn btn-lg btn-primary px-6" (click)="cancel()">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-xl-6 col-md-6 col-sm-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Uom Type</th>
+                    <th scope="col"> Symbol </th>
+                    <th scope="col">Formal Name </th>
+                    <th scope="col">Decimal Places</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of uomList; index as i">
+                    <td>
+                        {{ row.uomType }}
+                    </td>
+                    <td>{{ row.uomSymbol }}</td>
+                    <td>{{ row.uomFormalName }}</td>
+                    <td>{{ row.uomDecimalPlaces }}</td>
+
+                    <!-- <td>
+                        <fa-icon [icon]="faPencilAlt" (click)="editProduct(row)" role='button'></fa-icon>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

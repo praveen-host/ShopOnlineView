@@ -1,0 +1,71 @@
+<div id="non-printable">
+    <div class="row">
+        <div class="col-xl-7 col-md-7 col-sm-12">
+            <legend>Order Id : {{saleOrderDetail.orderId}} </legend>
+            <pre>Order Date: {{saleOrderDetail.orderPalcedOn}}, Est. Date : {{saleOrderDetail.scheduledFor}}, Status : {{saleOrderDetail.orderStatus}}
+Party Name: {{saleOrderDetail.firstName+" "+saleOrderDetail.lastName}}
+Amount : {{saleOrderDetail.orderValue}}  </pre>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" width="50">#</th>
+                        <th scope="col" width="120">Product Code</th>
+                        <th scope="col">Sku</th>
+                        <th scope="col" class="text-right" width="100">Order Qty.</th>
+                        <th width="30"></th>
+                        <th scope="col" class="text-right" width="120">Accepted Qty.</th>
+                        <th width="30"></th>
+                        <th scope="col" class="text-right" width="80">Mrp.</th>
+                        <th scope="col" class="text-right" width="80">Price</th>
+                        <th scope="col" class="text-right" width="120">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of saleOrderDetail.orderDetails; index as i">
+                        <td>{{i+1}}</td>
+                        <td>
+                            {{ item.productCode }}
+                        </td>
+                        <td>{{item.skuName}}</td>
+                        <td class="text-right">{{item.orderedQty}}</td>
+                        <td>{{item.uomSymbol}}</td>
+                        <td class="text-right">{{item.orderedQty}}</td>
+                        <td>{{item.uomSymbol}}</td>
+                        <td class="text-right">{{item.mrp | currency:'INR'}}</td>
+                        <td class="text-right">{{item.price | currency:'INR'}}</td>
+                        <td class="text-right">{{item.value | currency:'INR'}}</td>
+
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8"></td>
+                        <th class="text-right">Total</th>
+                        <th class="text-right">{{saleOrderDetail.orderValue | currency:'INR'}}</th>
+                    </tr>
+                    <tr>
+                        <td colspan="8"></td>
+                        <td>
+                            <button class="btn btn-primary" (click)="print()">
+                                <fa-icon [icon]="faPrint"></fa-icon>
+                                Print
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <fa-icon [icon]="faPaperPlane"></fa-icon>
+                                Dispatch
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<app-print-sales-order [saleOrderDetail]="saleOrderDetail"></app-print-sales-order>

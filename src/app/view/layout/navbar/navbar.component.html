@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" id="id01"  ngbDropdownToggle>Sales</a>
+          <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+            <a class="dropdown-item" routerLink="sales">Sales Order</a>
+            <a class="dropdown-item" routerLink="loadingslip">Loading Slip</a>
+            <a class="dropdown-item" href="#">Print Sales Order</a> 
+          </div>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" id="id01"  ngbDropdownToggle>Reports</a>
+          <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+            <a class="dropdown-item" routerLink="#">Sales</a>   
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" id="id01"  ngbDropdownToggle>Master</a>
+          <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+            <a class="dropdown-item" routerLink="master/uom">Unit Of Measure</a>
+            <a class="dropdown-item" routerLink="master/product">Product</a>
+            <a class="dropdown-item" routerLink="master/price">Price</a> 
+            <a class="dropdown-item" routerLink="master/store">Store</a> 
+          </div>
+        </li>
+
+      </ul>      
+    </div>
+    <div class="collapse navbar-collapse " >
+      
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,130 @@
+<div id="non-printable">
+    <div class="row">
+        <div class="col-xl-6 col-md-6 col-sm-12">
+            <legend>Generate Loading slip</legend>
+        </div>
+        <div class="col-xl-6 col-md-6 col-sm-12">
+            <form class="form-row" (ngSubmit)="view()" [formGroup]="filterForm">
+                <div class="form-group mr-2 mb-0">
+                    <label for="fromDate">Select Status</label>
+                    <ng-multiselect-dropdown [placeholder]="'Select Status'" [settings]="dropdownSettings"
+                        formControlName="orderStatus" [data]="dropdownList">
+                    </ng-multiselect-dropdown>
+                </div>
+                <div class="form-group mr-2  mb-0">
+                    <label for="fromDate">Start Date</label>
+                    <input type="date" class="form-control" formControlName="fromDate" pattern="dd-MM-yyyy"
+                        id="fromDate" placeholder="Start Date">
+                </div>
+                <div class="form-group mr-2  mb-0">
+                    <label for="toDate">End Date</label>
+                    <input type="date" class="form-control" formControlName="toDate" id="toDate" pattern="dd-MM-yyyy"
+                        placeholder="End Date">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">View</button>
+                <button type="button" class="btn btn-primary" (click)="open(content)">Create</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" width="30">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" [ngModel]="false">
+                                </label>
+                            </div>
+                        </th>
+                        <th scope="col" width="80">Order Id</th>
+                        <th scope="col" width="20%">Party Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col" width="120">Pincode</th>
+                        <th scope="col" class="text-right" width="80">Amount</th>
+                        <th scope="col" class="text-right" width="80">Payment</th>
+                        <th scope="col" class="text-right" width="120">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of rowData">
+                        <td scope="col" width="30">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" (change)="orderCheck($event,item.orderId)">
+                                </label>
+                            </div>
+                        </td>
+                        <td>{{item.orderId}}</td>
+                        <td>{{item.firstName}}</td>
+                        <td>{{item.addressLine1+ ", "+item.addressLine2+ " "+item.city+" "+item.stateProvission}}</td>
+                        <td>{{item.pinCode}}</td>
+                        <td>{{item.orderValue| currency:'INR'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Enter Delevery Details</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="loadingSlipForm">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12  py-0 px-1">
+                        <div class="form-group">
+                            <label for="vechileType">Vechile Type</label>
+                            <input type="text" class="form-control" formControlName="vechileType"
+                                placeholder="Vechile Type">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 py-0 px-1">
+                        <div class="form-group">
+                            <label for="vechileNo">Vechile Number</label>
+                            <input type="text" class="form-control" formControlName="vechileNo"
+                                placeholder="Vechile Number">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12  py-0 px-1">
+                        <div class="form-group">
+                            <label for="driverName">Driver Name</label>
+                            <input type="text" class="form-control" formControlName="driverName"
+                                placeholder="Driver Name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12  py-0 px-1">
+                        <div class="form-group">
+                            <label for="driverContactNo">Contact No.</label>
+                            <input type="text" class="form-control" formControlName="driverContactNo"
+                                placeholder="Contact No.">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group" formArrayName="orderNoList">
+                            <label for="orderLst">Order Numbers</label>
+                            <ul *ngIf="loadingSlipForm.get('orderNoList')!=null">
+                                <li  *ngFor="let item of getSelectedOrderList.controls">{{item.get('orderNo')?.value}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" [disabled]="!loadingSlipForm.valid">Confirm</button>
+            
+        </div>
+    </ng-template>
+</div>

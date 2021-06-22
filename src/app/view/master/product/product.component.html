@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-xl-6">
+        <form [formGroup]="productEditForm" (ngSubmit)="submit()">
+            <fieldset>
+                <div class="row">
+                    <div class="col-6">
+                        <legend>Add Product</legend>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="productCode">Product Code</label>
+                            <input formControlName="productCode" type="text" class="form-control">
+                            <div *ngIf="productEditForm.get('productCode')?.invalid && productEditForm.get('productCode')?.touched"
+                                class="text-danger">
+                                <span>Product Code is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="">HSN Code</label>
+
+                            <select formControlName="hsnCode" class="form-select">
+                                <option value="" disabled selected>Select HSN Code</option>
+                                <option *ngFor="let item of gstData" [ngValue]="item.hsnCode">{{item.hsnCode}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="skuName">Sku Name</label>
+                            <input formControlName="skuName" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="uomSymbol">UOM</label>
+                            <select formControlName="uomSymbol" class="form-select">
+                                <option value="" disabled selected>Select Uom</option>
+                                <option *ngFor="let item of uomData" [ngValue]="item.uomSymbol">{{item.uomSymbol}}
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <input type="text" formControlName="brand" name="" id="" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" formControlName="category" name="" id="" class="form-control">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 px-0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="">Short Description</label>
+                                    <input formControlName="shortDescription" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group"><label for="">Long Description</label><input
+                                        formControlName="longDescription" type="text" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 divImage">
+                        <div class="form-group">
+                            <img height="130" style="border-radius: 10px; border: 2px rgba(0, 0, 0, 0.548) solid;"
+                                [src]="imageSrc ||'https://via.placeholder.com/150'">
+                                <span>
+                                   <h3><fa-icon [icon]="faCamera"  (click)="fileInput.click()" role='button'></fa-icon></h3>
+                                    <input #fileInput type="file" (change)="uploadFile($event)" style="display:none;" />
+                                </span>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <button type="submit" [disabled]="!productEditForm.valid" class="btn btn-lg btn-primary px-6">
+                            <span role="status" aria-hidden="true" class="spinner-grow spinner-grow-sm"
+                                hidden=""></span> {{isEditing?'Update':'Add'}}
+                        </button>&nbsp;
+                        <button class="btn btn-lg btn-primary px-6" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-xl-6 col-md-6 col-sm-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product Code</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Sku</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of rowData; index as i">
+                    <td>
+                        {{ row.productCode }}
+                    </td>
+                    <td>{{ row.brand }}</td>
+                    <td>{{ row.category }}</td>
+                    <td>{{ row.skuName }}</td>
+
+                    <td>
+                        <fa-icon [icon]="faPencilAlt" (click)="editProduct(row)" role='button'></fa-icon>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
